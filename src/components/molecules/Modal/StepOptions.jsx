@@ -109,7 +109,7 @@ export default function StepOptions(props) {
       <Grid
         container
         direction="row"
-        style={{ marginTop: "30px", width: "100%" }}
+        style={{ marginTop: "20px", width: "100%" }}
         justifyContent={
           props.type === "text-input" || (props.type === "finish" && "center")
         }
@@ -245,7 +245,14 @@ function Step4(props) {
 
 function Step5(props) {
   return (
-    <div style={{ fontSize: "25px", fontWeight: "700", margin: "50px" }}>
+    <div
+      style={{
+        fontSize: "20px",
+        fontWeight: "700",
+        margin: "50px",
+        width: "600px",
+      }}
+    >
       {props.text}
     </div>
   );

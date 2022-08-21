@@ -5,7 +5,7 @@ export default function StepTitle(props) {
   return (
     <div
       style={{
-        fontSize: "30px",
+        fontSize: "20px",
         fontWeight: "bold",
       }}
     >

@@ -8,7 +8,7 @@ export default function Checkbox(props) {
     <FormGroup
       sx={{
         "& .MuiTypography-root": {
-          fontSize: "20px",
+          fontSize: "18px",
           margin: "7.5px 0 7.5px 0",
           width: "350px",
         },

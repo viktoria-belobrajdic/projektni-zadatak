@@ -28,7 +28,7 @@ export default function CouponAndPrice(props) {
       {!overmindState.couponInput && !overmindState.discount && (
         <div
           style={{
-            fontSize: "20px",
+            fontSize: "18px",
             color: "blue",
             fontWeight: "bold",
             textDecoration: "underline",
@@ -64,7 +64,7 @@ export default function CouponAndPrice(props) {
       {!overmindState.couponInput && overmindState.discount && (
         <div
           style={{
-            fontSize: "20px",
+            fontSize: "18px",
             textAlign: "right",
           }}
         >
@@ -86,7 +86,7 @@ export default function CouponAndPrice(props) {
       )}
       <div
         style={{
-          fontSize: "30px",
+          fontSize: "25px",
           textAlign: "right",
         }}
       >

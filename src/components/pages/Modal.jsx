@@ -89,7 +89,7 @@ export default function Modal(props) {
         <ModalHeader onClose={props.onClose && props.onClose} />
         <div
           style={{
-            marginTop: "40px",
+            marginTop: "20px",
             textAlign: steps[stepIndex].type === "finish" && "center",
           }}
         >

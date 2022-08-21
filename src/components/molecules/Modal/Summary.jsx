@@ -131,8 +131,7 @@ export default function Summary(props) {
       item
       xs={props.option === "KONTAKT PODACI" ? 12 : 6}
       style={{
-        fontSize: "25px",
-        marginTop: "20px",
+        fontSize: "18px",
       }}
       borderTop={props.option === "KONTAKT PODACI" && "2px solid #848786"}
     >
