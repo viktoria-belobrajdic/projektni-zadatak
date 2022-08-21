@@ -10,10 +10,10 @@ export default function Button(props) {
       size={props.size}
       sx={{ m: props.spacing }}
       style={{
-        fontSize: "1rem",
-        color: "black",
+        fontSize: "14px",
+        color: props.disabled ? "gray" : "black",
         border: "2px solid black",
-        background: "#848786",
+        background: props.disabled ? "#aaa" : "#848786",
       }}
       {...rest}
     >

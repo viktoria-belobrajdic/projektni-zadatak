@@ -27,7 +27,7 @@ export default function ModalFooter(props) {
       )}
       <Button
         onClick={props.onNext && props.onNext}
-        disabled={overmindState.nextDisabled}
+        disabled={!overmindState.enableGoNext}
         size="large"
         spacing={1}
       >

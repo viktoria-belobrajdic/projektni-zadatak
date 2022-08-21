@@ -7,7 +7,6 @@ import { useActions, useOvermindState } from "../../../overmind/index";
 
 export default function CouponAndPrice(props) {
   const [couponCode, setCouponCode] = useState("");
-  const [discount, setDiscount] = useState(false);
   const actions = useActions();
   const overmindState = useOvermindState();
 

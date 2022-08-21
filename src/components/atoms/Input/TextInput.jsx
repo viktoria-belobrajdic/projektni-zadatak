@@ -10,7 +10,6 @@ export default function TextInput(props) {
         "& > :not(style)": {
           m: 1,
           width: "100%",
-          border: "2px solid black",
         },
 
         "& label.Mui-focused": {
@@ -23,11 +22,12 @@ export default function TextInput(props) {
       <TextField
         required={props.required}
         id="outlined"
+        value={props.value}
         label={props.option}
         size={props.small && "small"}
         onChange={(e) => props.onChange(e.target.value)}
         multiline={props.multiline}
-        rows={props.multiline && 4}
+        rows={props.multiline ? 4 : 1}
       />
     </Box>
   );

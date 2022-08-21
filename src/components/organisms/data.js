@@ -39,7 +39,7 @@ export const steps = [
     options: [
       { title: "Ime i prezime", code: "name" },
       { title: "Email adresa", code: "email" },
-      { title: "Broj telefonaa", code: "phoneNumber" },
+      { title: "Broj telefona", code: "phoneNumber" },
       { title: "Napomena (opcionalno)", code: "note" },
     ],
     type: "text-input",

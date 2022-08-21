@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState } from "react";
 import Grid from "@mui/material/Grid";
 
 import Checkbox from "../../atoms/Button/Checkbox";
@@ -22,10 +22,27 @@ export default function StepOptions(props) {
   const [price, setPrice] = useState(
     overmindState.price ? overmindState.price : 0
   );
+  const [name, setName] = useState(
+    overmindState.name ? overmindState.name : ""
+  );
+  const [email, setEmail] = useState(
+    overmindState.email ? overmindState.email : ""
+  );
+  const [phoneNumber, setPhoneNumber] = useState(
+    overmindState.phoneNumber ? overmindState.phoneNumber : ""
+  );
+  const [note, setNote] = useState(
+    overmindState.note ? overmindState.note : ""
+  );
 
   const handleCarManufacturer = (value) => {
-    actions.setCarManufacturer(value);
     setCarManufacturer(value);
+    actions.setCarManufacturer(value);
+    if (value) {
+      actions.setEnableGoNext(true);
+    } else {
+      actions.setEnableGoNext(false);
+    }
   };
 
   const handleService = (value, option) => {
@@ -44,6 +61,12 @@ export default function StepOptions(props) {
     setPrice(newPrice);
     setServices(newServices);
 
+    if (newServices.length !== 0) {
+      actions.setEnableGoNext(true);
+    } else {
+      actions.setEnableGoNext(false);
+    }
+
     actions.setServices(newServices);
     actions.setPrice(newPrice);
   };
@@ -51,19 +74,29 @@ export default function StepOptions(props) {
   const handleContactInformation = (value, code) => {
     switch (code) {
       case "name":
+        setName(value);
         actions.setName(value);
         break;
       case "email":
+        setEmail(value);
         actions.setEmail(value);
         break;
       case "phoneNumber":
+        setPhoneNumber(value);
         actions.phoneNumber(value);
         break;
       case "note":
+        setNote(value);
         actions.note(value);
         break;
       default:
         break;
+    }
+
+    if (name && email && phoneNumber) {
+      actions.setEnableGoNext(true);
+    } else {
+      actions.setEnableGoNext(false);
     }
   };
 
@@ -100,6 +133,10 @@ export default function StepOptions(props) {
         {handleShowStep("text-input", 2) && (
           <Step3
             options={props.options}
+            name={name}
+            email={email}
+            phoneNumber={phoneNumber}
+            note={note}
             index={props.index}
             onChange={(val, option) => handleContactInformation(val, option)}
           />
@@ -117,9 +154,6 @@ export default function StepOptions(props) {
             text={props.text}
             index={props.index}
             stepIndex={overmindState.stepIndex}
-            onFinish={(index) => {
-              console.log(index);
-            }}
           />
         )}
       </Grid>
@@ -156,7 +190,7 @@ function Step2(props) {
     return (
       <Checkbox
         key={`checkbox-button-${index}`}
-        checked={service?.service && true}
+        checked={service?.service ? true : false}
         option={option.service + " (" + option.price + "kn)"}
         onChange={(val) => props.onChange(val, option)}
       />
@@ -165,12 +199,26 @@ function Step2(props) {
 }
 
 function Step3(props) {
+  const getValueByCode = (code) => {
+    switch (code) {
+      case "name":
+        return props.name;
+      case "email":
+        return props.email;
+      case "phoneNumber":
+        return props.phoneNumber;
+      case "note":
+        return props.note;
+      default:
+        return "";
+    }
+  };
   return props.options.map((option, index) => {
     return (
-      <Grid item xs={6}>
-        <div style={{ margin: "0 10px" }}>
+      <Grid item xs={6} key={`text-input-${index}`}>
+        <div style={{ margin: "0 10px" }} key={`text-input-${index}`}>
           <TextInput
-            key={`text-input-${index}`}
+            value={getValueByCode(option.code)}
             option={option.title}
             required={option.title === "Napomena (opcionalno)" ? false : true}
             multiline={option.title === "Napomena (opcionalno)" ? true : false}
@@ -189,8 +237,6 @@ function Step4(props) {
         key={`summary-${index}`}
         option={option}
         stepIndex={props.stepIndex}
-        required={option === "Napomena (opcionalno)" ? false : true}
-        multiline={option === "Napomena (opcionalno)" ? true : false}
         onEdit={() => props.onEdit(index)}
       />
     );

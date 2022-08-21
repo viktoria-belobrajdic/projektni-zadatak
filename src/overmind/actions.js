@@ -1,3 +1,5 @@
+import { state as defaultState } from "./state";
+
 export const setStepIndex = ({ state }, value) => {
   state.stepIndex = value;
 };
@@ -18,7 +20,7 @@ export const note = ({ state }, value) => {
   state.note = value;
 };
 
-export const setCarManufacturer = ({ state }, value) => {
+export const setCarManufacturer = ({ state, actions }, value) => {
   state.carManufacturer = value;
 };
 
@@ -40,6 +42,6 @@ export const setDiscount = ({ state }, value) => {
   state.discount = value;
 };
 
-export const setNextDisabled = ({ state }, value) => {
-  state.nextDisabled = value;
+export const setEnableGoNext = ({ state }, value) => {
+  state.enableGoNext = value;
 };

@@ -1,6 +1,6 @@
 export const state = {
   stepIndex: 0,
-  nextDisabled: false,
+  enableGoNext: false,
   carManufacturer: "",
   services: [],
   name: "",

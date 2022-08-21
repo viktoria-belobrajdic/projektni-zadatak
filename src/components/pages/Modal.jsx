@@ -14,7 +14,7 @@ const style = {
   transform: "translate(-50%, -50%)",
   maxWidth: 1200,
   minWidth: "80%",
-  minHeight: 600,
+  minHeight: "60%",
   bgcolor: "background.paper",
   border: "2px solid #000",
   boxShadow: 24,
@@ -37,28 +37,42 @@ export default function Modal(props) {
 
   const handleStepIndex = (val) => {
     let index = stepIndex;
-    setStepIndex(index + val);
-    actions.setStepIndex(index + val);
+    let newStep = index + val;
+    setStepIndex(newStep);
+    actions.setStepIndex(newStep);
   };
 
-  // useEffect(() => {
-  //   if (overmindState.stepIndex === 0 && overmindState.carManufacturer)
-  //     actions.setNextDisabled(false);
-  //   if (overmindState.stepIndex === 1 && overmindState.services.length > 0)
-  //     actions.setNextDisabled(false);
-  //   if (overmindState.stepIndex === 1 && overmindState.services.length === 0)
-  //     actions.setNextDisabled(true);
-  //   if (
-  //     overmindState.stepIndex === 2 &&
-  //     overmindState.name &&
-  //     overmindState.email &&
-  //     overmindState.phoneNumber
-  //   )
-  //     actions.setNextDisabled(false);
-
-  //   if (overmindState.stepIndex === 3 || overmindState.stepIndex === 4)
-  //     actions.setNextDisabled(false);
-  // }, [overmindState]);
+  useEffect(() => {
+    switch (overmindState.stepIndex) {
+      case 0:
+        if (overmindState.carManufacturer) {
+          actions.setEnableGoNext(true);
+        } else {
+          actions.setEnableGoNext(false);
+        }
+        break;
+      case 1:
+        if (overmindState.services.length !== 0) {
+          actions.setEnableGoNext(true);
+        } else {
+          actions.setEnableGoNext(false);
+        }
+        break;
+      case 2:
+        if (
+          overmindState.name &&
+          overmindState.email &&
+          overmindState.phoneNumber
+        ) {
+          actions.setEnableGoNext(true);
+        } else {
+          actions.setEnableGoNext(false);
+        }
+        break;
+      default:
+        break;
+    }
+  }, [overmindState.stepIndex]);
 
   useEffect(() => {
     setStepIndex(overmindState.stepIndex);

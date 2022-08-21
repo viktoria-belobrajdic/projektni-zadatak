@@ -1,63 +1,143 @@
 import React from "react";
-import Box from "@mui/material/Box";
-import TextField from "@mui/material/TextField";
+
 import { Grid } from "@mui/material";
 import Button from "../../atoms/Button/Button";
 
-import { useActions, useOvermindState } from "../../../overmind/index";
+import { useOvermindState } from "../../../overmind/index";
 
 export default function Summary(props) {
   const overmindState = useOvermindState();
-  const actions = useActions();
 
-  console.log(overmindState);
+  const priceWithTwoDecimals = (price) => {
+    return price.toFixed(2);
+  };
 
   const renderCarModel = () => {
     return <div>{overmindState.carManufacturer}</div>;
   };
 
   const renderSelectedServices = () => {
-    return overmindState.services.map((service, index) => {
-      return (
-        <Grid
-          container
-          direction="row"
-          justifyContent="space-between"
-          alignItems="center"
+    return (
+      <>
+        {overmindState.services.map((service, index) => {
+          return (
+            <>
+              <Grid
+                container
+                direction="row"
+                justifyContent="space-between"
+                alignItems="center"
+                key={`selected-services-${index}`}
+              >
+                <Grid item key={`selected-services-name-${index}`}>
+                  {" "}
+                  {service.service}
+                </Grid>
+                <Grid item key={`selected-services-price-${index}`}>
+                  {priceWithTwoDecimals(service.price)} KN
+                </Grid>
+              </Grid>
+            </>
+          );
+        })}
+
+        <div
+          style={{
+            textAlign: "right",
+          }}
         >
-          <Grid item> {service.service}</Grid>
-          <Grid item>{service.price} KN</Grid>
-        </Grid>
-      );
-    });
+          {overmindState.discount && (
+            <div>
+              Popust (30%):{" "}
+              <b>-{priceWithTwoDecimals(overmindState.discountValue)} KN</b>
+            </div>
+          )}
+          <div>
+            UKUPNO:{" "}
+            <b>
+              {priceWithTwoDecimals(
+                overmindState.discount
+                  ? overmindState.discountPrice
+                  : overmindState.price
+              )}{" "}
+              KN
+            </b>
+          </div>
+        </div>
+      </>
+    );
   };
 
   const renderContactInfo = () => {
     return (
-      <Grid
-        container
-        direction="row"
-        justifyContent="space-between"
-        alignItems="center"
-      >
-        <Grid item> {overmindState.name}</Grid>
-        <Grid item>{overmindState.email}</Grid>
-        <Grid item>{overmindState.phoneNumber}</Grid>
+      <Grid container direction="row">
+        <Grid
+          container
+          direction="row"
+          justifyContent="space-between"
+          alignItems="flex-start"
+          xs={6}
+        >
+          <div>Ime i prezime:</div>
+          <div style={{ marginRight: "30px" }}>{overmindState.name}</div>
+        </Grid>
+        <Grid
+          container
+          direction="row"
+          justifyContent="space-between"
+          alignItems="flex-start"
+          xs={6}
+        >
+          <div>Email adresa:</div>
+          <div>{overmindState.name}</div>
+        </Grid>
+        <Grid
+          container
+          direction="row"
+          justifyContent="space-between"
+          alignItems="flex-start"
+          xs={6}
+        >
+          <div>Broj telefona:</div>
+          <div style={{ marginRight: "30px" }}>{overmindState.phoneNumber}</div>
+        </Grid>
+        <Grid
+          container
+          direction="row"
+          justifyContent="space-between"
+          alignItems="flex-start"
+          xs={6}
+        >
+          <div>Napomena:</div>
+          <div
+            style={{
+              overflow: "hidden",
+              display: "-webkit-box",
+              WebkitBoxOrient: "vertical",
+              WebkitLineClamp: 3,
+              width: "400px",
+              textAlign: "right",
+            }}
+          >
+            {overmindState.note}
+          </div>
+        </Grid>
       </Grid>
     );
   };
 
-  console.log(overmindState);
   return (
     <Grid
       item
       xs={props.option === "KONTAKT PODACI" ? 12 : 6}
       style={{
-        fontSize: "30px",
+        fontSize: "25px",
+        marginTop: "20px",
       }}
+      borderTop={props.option === "KONTAKT PODACI" && "2px solid #848786"}
     >
       {props.option}
-      <Button spacing={true} onClick={props.onEdit && props.onEdit}>
+      <Button spacing={1} onClick={props.onEdit && props.onEdit}>
         Uredi
       </Button>
       {props.option === "MODEL VOZILA" && renderCarModel()}

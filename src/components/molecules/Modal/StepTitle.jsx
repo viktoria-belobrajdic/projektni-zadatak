@@ -1,12 +1,11 @@
 import React from "react";
-import Grid from "@mui/material/Grid";
 
 export default function StepTitle(props) {
   const index = props.stepIndex + 1;
   return (
     <div
       style={{
-        fontSize: "2rem",
+        fontSize: "30px",
         fontWeight: "bold",
       }}
     >
