@@ -1,5 +1,3 @@
-import { state as defaultState } from "./state";
-
 export const setStepIndex = ({ state }, value) => {
   state.stepIndex = value;
 };
