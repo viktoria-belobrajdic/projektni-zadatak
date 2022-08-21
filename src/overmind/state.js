@@ -1,0 +1,15 @@
+export const state = {
+  stepIndex: 0,
+  nextDisabled: false,
+  carManufacturer: "",
+  services: [],
+  name: "",
+  email: "",
+  phoneNumber: "",
+  note: "",
+  price: 0,
+  discountValue: 0,
+  discountPrice: 0,
+  couponInput: false,
+  discount: false,
+};
